@@ -8,7 +8,7 @@ const cardDeck = [
             subtype : "Giant", //Sotto-tipologia //?opzionale
         },
         exspansionInfo : {
-            release : 9, //Release d'appartenenza della carta
+            release : "9", //Release d'appartenenza della carta
             rarity : "rare", //Rarità della carta
             collectionNumber : "370/177",
         },
@@ -42,7 +42,7 @@ const cardDeck = [
             subtype : "Troll", //Sotto-tipologia //?opzionale
         },
         exspansionInfo : {
-            release : 9, //Release d'appartenenza della carta
+            release : "9", //Release d'appartenenza della carta
             rarity : "rare", //Rarità della carta
             collectionNumber : "370/177",
         },
@@ -76,7 +76,7 @@ const cardDeck = [
             subtype : "", //Sotto-tipologia //?opzionale
         },
         exspansionInfo : {
-            release : 4, //Release d'appartenenza della carta
+            release : "4", //Release d'appartenenza della carta
             rarity : "super-rare", //Rarità della carta
             collectionNumber : "370/177",
         },
@@ -163,12 +163,22 @@ categorySelectElement.addEventListener("change", () => {
 
 startResearchButton.addEventListener("click", () => {
     //Elementi ausiliari per la ricerca
-    const auxSelectedSearch = categorySelectElement.value;
     const auxSearchedString = researchElement.value;
+    
     let auxCardDeckArray = [];
-    for( let i = 0; i<cardDeck.length; i++) {
-        if (cardDeck[i][auxSelectedSearch].includes(auxSearchedString)) {
-            auxCardDeckArray.push(cardDeck[i]);
+
+    const auxSelectedSearchArray = categorySelectElement.value.split("-");
+    if (auxSelectedSearchArray.length == 2) {
+        for( let i = 0; i<cardDeck.length; i++) {
+            if (cardDeck[i][auxSelectedSearchArray[0]][auxSelectedSearchArray[1]].includes(auxSearchedString)) {
+                auxCardDeckArray.push(cardDeck[i]);
+            }
+        }
+    } else {
+        for( let i = 0; i<cardDeck.length; i++) {
+            if (cardDeck[i][auxSelectedSearchArray[0]].includes(auxSearchedString)) {
+                auxCardDeckArray.push(cardDeck[i]);
+            }
         }
     }
     cardDeckElement.innerHTML = printDeck(auxCardDeckArray);
