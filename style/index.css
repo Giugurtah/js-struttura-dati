@@ -13,6 +13,8 @@ img {
 #card_deck {
     display: flex;
     justify-content: space-between;
+
+    margin-top: 20px;
 }
 
 .card_display {
@@ -20,4 +22,8 @@ img {
     display: inline-block;
     border: solid 2px black;
     border-radius: 10px;
+}
+
+.hidden {
+    visibility: hidden;
 }

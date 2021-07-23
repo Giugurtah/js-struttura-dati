@@ -8,9 +8,26 @@
     <title>Magic database</title>
 </head>
 <body>
-    <div id="card_deck">
-        
-    </div>
+    <select name="category_selector" id="category_selector">
+        <option value="all" selected>Tutte</option>
+        <option value="name">Nome</option>
+        <option value="lounchCost">Costo di lancio</option>
+        <option value="type-type">Tipo</option>
+        <option value="type-subtype">Sotto-tipo</option>
+        <option value="exspansionInfo-release">Release</option>
+        <option value="exspansionInfo-rarity">Rarità</option>
+        <option value="exspansionInfo-collectionNumber">Numero di collezione</option>
+        <option value="flavourText-text">Testo di colore</option>
+        <option value="flavourText-author">Autore testo di colore</option>
+        <option value="image-source">Sorgente artwork</option>
+        <option value="image-author">Autore artwork</option>
+        <option value="constitution">Costituzione</option>
+        <option value="strength">Forza</option>
+        <option value="borderColor">Colore bordo</option>
+    </select>
+    <input type="search" id="research_form" placeholder="cerca..." class="hidden">
+    <button id="start_research" class="hidden">Avvia ricerca</button>
+    <div id="card_deck"></div>
     <script src="./js/index.js"></script>
 
 </body>

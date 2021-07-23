@@ -1,38 +1,4 @@
-const card = {
-    name : "Bloodfire colossus", //Nome carta 
-    lounchCost: "6RR", //aCosto di lancio
-    type : {
-        type : "Creature", //Tipologia principale (necessaria)
-        subtype : "Giant", //Sotto-tipologia //?opzionale
-    },
-    exspansionInfo : {
-        release : 9, //Release d'appartenenza della carta
-        rarity : "rare", //Rarità della carta
-        collectionNumber : "370/177",
-    },
-    ability : [
-        {
-            ability : "lorem ipsum dolor...", //?opzionale
-            lounchCost : "RT",
-        },
-        {
-            ability : "lorem ipsum dolor...", //?opzionale
-            lounchCost : "RT",
-        }
-    ],
-    flavourText : {
-        text : "lorem ipsum dolor....",
-        author : "Pinco Pallo",
-    },
-    image : {
-        source : "./img/art1.jpg", //Sorgente dell'arte
-        author : "Pinco Pallo", //Nome dell'artista
-    },
-    constitution: 13, //?Opzionale
-    strength: 13, //?Opzionale
-    borderColor : "#000", //Colore del bordo
-};
-
+//Array di oggetti card
 const cardDeck = [
     {
         name : "Bloodfire colossus", //Nome carta 
@@ -64,8 +30,8 @@ const cardDeck = [
             source : "./img/art1.jpg", //Sorgente dell'arte
             author : "Pinco Pallo", //Nome dell'artista
         },
-        constitution: 13, //?Opzionale
-        strength: 13, //?Opzionale
+        constitution: "13", //?Opzionale
+        strength: "13", //?Opzionale
         borderColor : "#000", //Colore del bordo
     },
     {
@@ -98,8 +64,8 @@ const cardDeck = [
             source : "./img/art2.jpg", //Sorgente dell'arte
             author : "Pinco Pallo", //Nome dell'artista
         },
-        constitution: 9, //?Opzionale
-        strength: 3, //?Opzionale
+        constitution: "9", //?Opzionale
+        strength: "3", //?Opzionale
         borderColor : "#000", //Colore del bordo
     },
     {
@@ -132,8 +98,8 @@ const cardDeck = [
             source : "./img/art3.jpg", //Sorgente dell'arte
             author : "Pinco Pallo", //Nome dell'artista
         },
-        constitution: 0, //?Opzionale
-        strength: 0, //?Opzionale
+        constitution: "", //?Opzionale
+        strength: "", //?Opzionale
         borderColor : "#000", //Colore del bordo
     },
     {
@@ -166,17 +132,49 @@ const cardDeck = [
             source : "./img/art1.jpg", //Sorgente dell'arte
             author : "Pinco Pallo", //Nome dell'artista
         },
-        constitution: 13, //?Opzionale
-        strength: 13, //?Opzionale
+        constitution: "13", //?Opzionale
+        strength: "3", //?Opzionale
         borderColor : "#000", //Colore del bordo
     },
 ]
 
-//Preparo l'elemento HTML
+//Preparo l'elemento HTML per stampare
 const cardDeckElement = document.getElementById("card_deck");
 //Inserisco nell'elemento appena creato il codice generato dalla funzione in modo da stampare le carte
 cardDeckElement.innerHTML = printDeck(cardDeck);
 
+//Preparo glo elementi per il filtro
+const categorySelectElement = document.getElementById("category_selector");
+const researchElement = document.getElementById("research_form");
+const startResearchButton = document.getElementById("start_research");
+
+//Faccio sparire/apparire il campo di ricerca e il bottone quando l'opzione selezionata è/non è all
+categorySelectElement.addEventListener("change", () => {
+    if(categorySelectElement.value !== "all") {
+        researchElement.classList.remove("hidden");
+        startResearchButton.classList.remove("hidden");
+    } else {
+        researchElement.classList.add("hidden");
+        startResearchButton.classList.add("hidden");
+        //Quando l'opzione selezionata è all faccio apparire tutte le carte
+        cardDeckElement.innerHTML = printDeck(cardDeck);
+    }
+});
+
+startResearchButton.addEventListener("click", () => {
+    //Elementi ausiliari per la ricerca
+    const auxSelectedSearch = categorySelectElement.value;
+    const auxSearchedString = researchElement.value;
+    let auxCardDeckArray = [];
+    for( let i = 0; i<cardDeck.length; i++) {
+        if (cardDeck[i][auxSelectedSearch].includes(auxSearchedString)) {
+            auxCardDeckArray.push(cardDeck[i]);
+        }
+    }
+    cardDeckElement.innerHTML = printDeck(auxCardDeckArray);
+});
+
+//*FUNZIONI
 function printCard (object) {
     //Gestisco il sottotipo della carta essendo opzionale
     const auxSubtype = object.type.subtype ? `- ${object.type.subtype}` : ``;
@@ -240,3 +238,4 @@ function printDeck (array) {
     }
     return HTMLcode;
 }
+
